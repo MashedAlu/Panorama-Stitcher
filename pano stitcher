@@ -1,0 +1,20 @@
+
+# target folder
+folder = "frames/";
+
+# load images
+filenames = os.listdir(folder);
+images = [];
+for file in filenames:
+    # get image
+    img = cv2.imread(folder + file);
+
+    # save
+    images.append(img);
+
+# use built in stitcher
+stitcher = cv2.Stitcher.create();
+(status, stitched) = stitcher.stitch(images);
+cv2_imshow(stitched);
+cv2.waitKey(0);
+cv2.imwrite("pano.png", stitched);
